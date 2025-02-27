@@ -64,13 +64,22 @@ def palindromo(palavra, fim, inicio=0):
     return palindromo(palavra, fim - 1, inicio + 1)
 
 # Dado um número n, gere todas as possíveis combinações com as n primeiras letras do alfabeto. Ex.: n = 3. Resposta: ABC, ACB, BAC, BCA, CAB, CBA.
-# TENTAR NOVAMENTE!
-alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-combinacoes = []
+# Resolvido!
+def comparacao(alfabeto):
+    if len(alfabeto) == 1:
+        return [alfabeto]
+    
+    combinacoes = []
+    for i, letra in enumerate(alfabeto):
+        restante = alfabeto[:i] + alfabeto[i+1:]
+        for p in comparacao(restante):
+            combinacoes.append(letra + p)
+    return combinacoes
+
 def combinacoes_letras(qnt):
-    if qnt == 0:
-        return ""
-    return alfabeto[qnt-1] + combinacoes_letras(qnt-1)
+    alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[:qnt]
+    return comparacao(alfabeto)
+
 
 ''' Defina uma sequência de Fibonacci generalizada, de f0 a f1 como sequência
 fibg(f0, f1, 0), fibg(f0, f1, 1), fibg(f0, f1, 2), ..., onde:
